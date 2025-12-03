@@ -87,10 +87,15 @@ while ((value = totalIt.next()) !== null) {
     }
 }
 console.log(total);
-console.log(calculateDivisors(5n));
-console.log(calculateDivisors(4n));
-console.log(calculateDivisors(3n));
-console.log(calculateDivisors(12n));
+// console.log("-------");
+// console.log("5: " + isInvalidKey(5n));
+// console.log("55: " + isInvalidKey(55n));
+// console.log("556: " + isInvalidKey(556n));
+// console.log("611: " + isInvalidKey(611n));
+// console.log("2323: " + isInvalidKey(2323n));
+// console.log("666: " + isInvalidKey(666n));
+// console.log("446446: " + isInvalidKey(446446));
+// console.log("565656: " + isInvalidKey(565656));
 
 function isInvalidKey(bigint) {
     const stringNumber = bigint.toString();
@@ -98,13 +103,19 @@ function isInvalidKey(bigint) {
     const numberLengthNum = stringNumber.length; // normal number
     const numberDivisors = calculateDivisors(numberLength);
 
+    if (numberLengthNum === 1) {
+        return false;
+    }
+
     for (const divisor of numberDivisors) {
         const divisorNum = Number(divisor); // convert once
 
-        if (divisorNum === numberLengthNum) continue;
-
         if (divisorNum === 1){
-            return new Set(stringNumber).size === 1;
+            if (new Set(stringNumber).size === 1){
+                return true;
+            } else {
+                continue;
+            }
         }
 
         const numberSlices = [];
